@@ -1,0 +1,334 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../../app/**/*.php';
+
+@theme {
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+
+    /* Cúc Cu Dream — Storybook palette from brand illustration */
+    --color-bg-base:       #FFFFFF;
+    --color-bg-subtle:     #F5EDE0;
+    --color-bg-muted:      #EDE5D8;
+    --color-border:        #E0D5C5;
+    --color-border-strong: #C8B9A5;
+    --color-text-primary:  #2D2926;
+    --color-text-secondary:#3D3632;
+    --color-text-muted:    #8B7E74;
+    --color-text-inverse:  #FFFFFF;
+
+    --color-accent:        #D4896E;
+    --color-accent-light:  #F5E0D5;
+    --color-accent-dark:   #B8725A;
+    --color-sage:          #7B8B6F;
+    --color-sage-light:    #E5EBE0;
+    --color-gold:          #C9A84C;
+    --color-gold-light:    #F5EEDA;
+    --color-salmon:        #E8A08B;
+    --color-salmon-light:  #FBE8E2;
+}
+
+/* ─── Font setting: add class="font-serif-mode" to <html> ───── */
+html.font-serif-mode body,
+html.font-serif-mode .input,
+html.font-serif-mode .btn,
+html.font-serif-mode .nav-item,
+html.font-serif-mode .tab-item,
+html.font-serif-mode .badge {
+    font-family: 'Source Serif 4', ui-serif, Georgia, serif;
+}
+
+@layer base {
+    html {
+        color-scheme: light;
+        font-size: 112.5%; /* 18px base — larger for parents to read easily */
+        overflow-x: hidden;
+    }
+
+    body {
+        background-color: #F5EDE0;
+        color: #2D2926;
+        font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 500; /* bolder default for readability */
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #F5EDE0; }
+    ::-webkit-scrollbar-thumb { background: #C8B9A5; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8B7E74; }
+}
+
+@layer components {
+    /* ─── Cards ─────────────────────────────────────────────── */
+    .card {
+        background-color: #FFFCF7;
+        border: 1px solid #E0D5C5;
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    /* ─── Pill badge base ───────────────────────────────────── */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+    }
+
+    /* ─── Buttons ───────────────────────────────────────────── */
+    .btn {
+        @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-150 cursor-pointer;
+    }
+    .btn-primary { background: #1A1A1A; color: #FFFFFF; }
+    .btn-primary:hover { background: #2E2E2E; }
+    .btn-secondary { background: #FFFFFF; color: #1A1A1A; border: 1px solid #C8C8C8; }
+    .btn-secondary:hover { background: #FFF9F0; }
+    .btn-gold { background: #D4896E; color: #FFFFFF; }
+    .btn-gold:hover { background: #B8725A; }
+    .btn-ghost { color: #8B7E74; }
+    .btn-ghost:hover { background: #EDE5D8; color: #2D2926; }
+    .btn-danger { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+    .btn-danger:hover { background: #FECACA; }
+    .btn-success { background: #078A48; color: #FFFFFF; }
+    .btn-success:hover { background: #065F46; }
+
+    /* ─── Inputs ────────────────────────────────────────────── */
+    .input {
+        background: #FFFCF7;
+        border: 1px solid #E0D5C5;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        color: #2D2926;
+        font-size: 0.9rem;
+        font-weight: 500;
+        width: 100%;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        font-family: inherit;
+    }
+    .input:focus {
+        outline: none;
+        border-color: #D4896E;
+        box-shadow: 0 0 0 3px rgba(212,137,110,0.15);
+    }
+    .input::placeholder { color: #8B7E74; }
+    textarea.input { resize: vertical; min-height: 80px; }
+
+    /* ─── XP bar ────────────────────────────────────────────── */
+    .xp-bar { background: #EDE5D8; border-radius: 9999px; height: 5px; overflow: hidden; }
+    .xp-bar-fill {
+        background: linear-gradient(90deg, #D4896E, #7B8B6F);
+        height: 100%;
+        border-radius: 9999px;
+        transition: width 0.5s ease;
+    }
+
+    /* ─── Progress bar ──────────────────────────────────────── */
+    .progress-bar { background: #EDE5D8; border-radius: 9999px; height: 8px; overflow: hidden; }
+    .progress-fill { background: linear-gradient(90deg, #7B8B6F, #A3B595); height: 100%; border-radius: 9999px; transition: width 0.5s ease; }
+    .progress-fill-gold { background: linear-gradient(90deg, #C9A84C, #D4896E); }
+    .progress-fill-red  { background: linear-gradient(90deg, #DC2626, #F87171); }
+
+    /* ─── Rune banner ───────────────────────────────────────── */
+    .rune-banner {
+        background: linear-gradient(135deg, #FDE8D8, #FFF5F0);
+        border: 1px solid #F4B184;
+        border-radius: 0.625rem;
+        padding: 0.625rem 0.875rem;
+        animation: pulse-salmon 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-salmon {
+        0%, 100% { border-color: #F4B184; }
+        50%       { border-color: #F97316; }
+    }
+
+    /* ─── CỐT badge ─────────────────────────────────────────── */
+    .cot-badge {
+        background: #F5E0D5;
+        border: 1px solid #D4896E;
+        color: #B8725A;
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 700;
+    }
+
+    /* ─── Burning zone ──────────────────────────────────────── */
+    .burning-indicator {
+        background: linear-gradient(135deg, #FEE2E2, #FFF5F5);
+        border: 1px solid #FECACA;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        animation: burning-pulse 3s ease-in-out infinite;
+    }
+    @keyframes burning-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+        50%       { box-shadow: 0 0 8px 2px rgba(220,38,38,0.1); }
+    }
+
+    /* ─── Nav item ──────────────────────────────────────────── */
+    .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        color: #2D2926;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.15s;
+        text-decoration: none;
+    }
+    .nav-item:hover { background: #EDE5D8; color: #2D2926; }
+    .nav-item.active { background: #F5E0D5; color: #B8725A; font-weight: 700; }
+
+    /* ─── Post card ─────────────────────────────────────────── */
+    .post-card {
+        background: #FFFCF7;
+        border: 1px solid #E0D5C5;
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    .post-card:hover { border-color: #C8B9A5; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .post-card.is-cot  { border-left: 3px solid #D4896E; }
+    .post-card.has-rune { border-left: 3px solid #C9A84C; }
+    .post-card.is-signal { border-left: 3px solid #7B8B6F; }
+
+    /* ─── Comment menu (always visible on mobile) ──────────── */
+    @media (max-width: 1023px) {
+        .comment-menu-btn { opacity: 1 !important; }
+    }
+
+    /* ─── Avatar ────────────────────────────────────────────── */
+    .avatar { border-radius: 50%; object-fit: cover; }
+
+    /* ─── Level badge ───────────────────────────────────────── */
+    .level-badge {
+        background: #E5EBE0;
+        border: 1px solid #7B8B6F;
+        color: #5A6B4E;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+    }
+
+    /* ─── Đá Không Cực gem ──────────────────────────────────── */
+    .da-gem {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+        color: #C9A84C;
+        font-size: 0.75rem;
+    }
+
+    /* ─── Tab nav ───────────────────────────────────────────── */
+    .tab-nav { display: flex; gap: 0.25rem; border-bottom: 1px solid #E0D5C5; margin-bottom: 1rem; }
+    .tab-item {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #8B7E74;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition: all 0.15s;
+    }
+    .tab-item:hover { color: #2D2926; }
+    .tab-item.active { color: #2D2926; border-bottom-color: #D4896E; font-weight: 700; }
+
+    /* ─── Difficulty badges ─────────────────────────────────── */
+    .difficulty-normal { background: #D1FAE5; color: #065F46; }
+    .difficulty-hard   { background: #EDE9FE; color: #4C1D95; }
+    .difficulty-chaos  { background: #FEE2E2; color: #991B1B; }
+
+    /* ─── Sidebar widget card ───────────────────────────────── */
+    .widget-card {
+        background: #F5EDE0;
+        border: 1px solid #E0D5C5;
+        border-radius: 0.625rem;
+        padding: 0.875rem;
+    }
+    .widget-title {
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #8B7E74;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.625rem;
+    }
+
+    /* ─── Mobile: long URLs / content overflow fix ──────────── */
+    .post-content,
+    .post-card p,
+    .post-card div,
+    .card p,
+    .card div {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        max-width: 100%;
+    }
+
+    .post-content a,
+    .post-card a,
+    .card a {
+        overflow-wrap: break-word;
+        word-break: break-all;
+    }
+
+    /* ─── Heatmap tooltip ───────────────────────────────────── */
+    .heatmap-tip { font-size: 11px !important; font-weight: 500 !important; }
+
+    /* ─── Mobile responsive ─────────────────────────────────── */
+    @media (max-width: 768px) {
+        /* Bump base font even more for mobile readability */
+        html { font-size: 118.75%; /* 19px */ }
+
+        .card { padding: 1rem; }
+        .post-card { padding: 1rem; }
+
+        /* Tabs: horizontal scroll, no wrap */
+        .tab-nav {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            flex-wrap: nowrap;
+        }
+        .tab-nav::-webkit-scrollbar { display: none; }
+        .tab-item {
+            font-size: 0.85rem;
+            padding: 0.5rem 0.75rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Badges bigger on mobile */
+        .badge { font-size: 0.75rem; padding: 0.2rem 0.5rem; }
+        .level-badge { font-size: 0.72rem; padding: 0.15rem 0.45rem; }
+
+        /* Post card: bump small inline text (exclude tooltips) */
+        .post-card [style*="font-size:0.6rem"]:not(.heatmap-tip),
+        .post-card [style*="font-size:0.65rem"]:not(.heatmap-tip),
+        .post-card [style*="font-size:0.7rem"]:not(.heatmap-tip) {
+            font-size: 0.8rem !important;
+        }
+
+        /* Bolder text across the board */
+        .post-card, .card { font-weight: 500; }
+    }
+}
