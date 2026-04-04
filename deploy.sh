@@ -6,7 +6,7 @@
 set -e
 
 VPS="root@103.97.127.109"
-PORT=22
+PORT=2018
 APP="/var/www/cuccudream"
 
 echo "🚀 Deploying to cuccudream.com..."
