@@ -36,7 +36,12 @@
         <div style="position:absolute; bottom:15%; left:8%; font-size:3rem; opacity:0.1;" class="animate-float delay-2">🦋</div>
         <div style="position:absolute; top:30%; left:5%; font-size:2.5rem; opacity:0.08;" class="animate-float delay-3">✨</div>
 
-        <div style="max-width:800px; text-align:center;">
+        <div style="max-width:900px; text-align:center;">
+            {{-- Founder avatar --}}
+            <div class="fade-in" style="margin-bottom:1.5rem;">
+                <img src="/images/landing/founder-cuccu.jpg" alt="Cúc Cu - Founder"
+                     style="width:140px; height:140px; border-radius:50%; object-fit:cover; margin:0 auto; border:4px solid #E0D5C5; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+            </div>
             <p class="fade-in" style="font-size:1rem; font-weight:600; color:#D4896E; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:1rem;">
                 Cuc Cu's Dream Factory
             </p>
@@ -85,6 +90,12 @@
                 <h2 style="font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:800; color:#2D2926;">
                     Từ tro tàn tuổi 30, một giấc mơ hồi sinh
                 </h2>
+            </div>
+
+            {{-- Founder illustration --}}
+            <div style="text-align:center; margin-bottom:2.5rem;">
+                <img src="/images/landing/founder-fullbody.jpg" alt="Cúc Cu — Tranh & Đời thật"
+                     style="max-width:360px; width:100%; border-radius:0.75rem; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
             </div>
 
             <div style="display:grid; gap:2rem; grid-template-columns:1fr;" class="story-grid">
@@ -141,6 +152,14 @@
                 </p>
             </div>
 
+            {{-- Philosophy illustration strip --}}
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1rem; margin-bottom:2.5rem;">
+                <img src="/images/landing/philosophy-draw.jpg" alt="Vẽ của riêng mình"
+                     style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                <img src="/images/landing/heo-tho-online.jpg" alt="Học vẽ online sao mà học được?"
+                     style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+            </div>
+
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
                 {{-- Pillar 1 --}}
                 <div class="card" style="padding:1.75rem; text-align:center;">
@@ -185,6 +204,14 @@
                 <h2 style="font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:800; color:#2D2926;">
                     Chơi vui, vẽ đẹp, kể chuyện hay
                 </h2>
+            </div>
+
+            {{-- How online classes work --}}
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1rem; margin-bottom:2.5rem;">
+                <img src="/images/landing/zoom-learning.jpg" alt="Cách học qua Zoom"
+                     style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                <img src="/images/landing/break-free.jpg" alt="Xóa bỏ giới hạn"
+                     style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
             </div>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
@@ -317,6 +344,19 @@
                 </div>
             </div>
 
+            {{-- Student artworks gallery --}}
+            <div style="margin-top:2.5rem; margin-bottom:2rem;">
+                <p style="text-align:center; font-size:0.85rem; font-weight:700; color:#8B7E74; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1rem;">Tác phẩm học viên</p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+                    <img src="/images/landing/student-tho.jpg" alt="Tranh của chị Thỏ"
+                         style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                    <img src="/images/landing/student-vihoa.jpg" alt="Tranh của chị Vi Hoa"
+                         style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                    <img src="/images/landing/student-loan.jpg" alt="Tranh của chị Loan Nguyễn"
+                         style="width:100%; border-radius:0.75rem; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                </div>
+            </div>
+
             {{-- Community highlight --}}
             <div style="margin-top:2.5rem; background:linear-gradient(135deg, #F5E0D5, #E5EBE0); border-radius:0.75rem; padding:2rem; text-align:center;">
                 <p style="font-size:1.05rem; color:#3D3632; line-height:1.8; max-width:650px; margin:0 auto;">
@@ -400,6 +440,12 @@
                 Hơn 10 năm gieo mầm sáng tạo cho trẻ em, từ trẻ đặc biệt đến các bệnh nhi.
                 Câu chuyện của CCDF đã được báo Tuổi Trẻ, HTV7 và nhiều kênh truyền thông đưa tin.
             </p>
+
+            {{-- Hand-drawn press summary --}}
+            <div style="margin-top:2rem;">
+                <img src="/images/landing/founder-press.jpg" alt="Tổng hợp báo chí & truyền hình"
+                     style="max-width:400px; width:100%; margin:0 auto; border-radius:0.75rem; box-shadow:0 4px 20px rgba(0,0,0,0.08); display:block;">
+            </div>
         </div>
     </section>
 
