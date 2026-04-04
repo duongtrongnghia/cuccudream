@@ -14,9 +14,15 @@
                 <a href="#courses" style="text-decoration:none; color:#8B7E74; font-weight:600; font-size:0.85rem; display:none;" class="md-show">Khóa học</a>
                 <a href="#community" style="text-decoration:none; color:#8B7E74; font-weight:600; font-size:0.85rem; display:none;" class="md-show">Cộng đồng</a>
                 <a href="#press" style="text-decoration:none; color:#8B7E74; font-weight:600; font-size:0.85rem; display:none;" class="md-show">Báo chí</a>
-                <a href="{{ route('login') }}" class="btn" style="background:#D4896E; color:#fff; padding:0.5rem 1.25rem; border-radius:9999px; font-size:0.85rem; font-weight:700; text-decoration:none;">
-                    Tham gia ngay
-                </a>
+                @auth
+                    <a href="{{ route('feed') }}" class="btn" style="background:#D4896E; color:#fff; padding:0.5rem 1.25rem; border-radius:9999px; font-size:0.85rem; font-weight:700; text-decoration:none;">
+                        Vào Feed
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="btn" style="background:#D4896E; color:#fff; padding:0.5rem 1.25rem; border-radius:9999px; font-size:0.85rem; font-weight:700; text-decoration:none;">
+                        Tham gia ngay
+                    </a>
+                @endauth
             </div>
         </div>
     </nav>
@@ -430,12 +436,18 @@
                 không cần phải xù lông nhím hay hắc hóa để sinh tồn.
             </p>
             <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-                <a href="{{ route('register') }}" class="btn" style="background:#D4896E; color:#fff; padding:0.875rem 2.5rem; border-radius:9999px; font-size:1.1rem; font-weight:800; text-decoration:none; box-shadow:0 4px 20px rgba(212,137,110,0.35);">
-                    Tham gia Cúc Cu Dream
-                </a>
-                <a href="{{ route('login') }}" class="btn" style="background:transparent; color:#2D2926; padding:0.875rem 2.5rem; border-radius:9999px; font-size:1.1rem; font-weight:700; text-decoration:none; border:2px solid #2D2926;">
-                    Đăng nhập
-                </a>
+                @auth
+                    <a href="{{ route('feed') }}" class="btn" style="background:#D4896E; color:#fff; padding:0.875rem 2.5rem; border-radius:9999px; font-size:1.1rem; font-weight:800; text-decoration:none; box-shadow:0 4px 20px rgba(212,137,110,0.35);">
+                        Vào Feed
+                    </a>
+                @else
+                    <a href="{{ route('register') }}" class="btn" style="background:#D4896E; color:#fff; padding:0.875rem 2.5rem; border-radius:9999px; font-size:1.1rem; font-weight:800; text-decoration:none; box-shadow:0 4px 20px rgba(212,137,110,0.35);">
+                        Tham gia Cúc Cu Dream
+                    </a>
+                    <a href="{{ route('login') }}" class="btn" style="background:transparent; color:#2D2926; padding:0.875rem 2.5rem; border-radius:9999px; font-size:1.1rem; font-weight:700; text-decoration:none; border:2px solid #2D2926;">
+                        Đăng nhập
+                    </a>
+                @endauth
             </div>
         </div>
     </section>

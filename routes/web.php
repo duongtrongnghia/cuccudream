@@ -33,14 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/webhook/sepay', \App\Http\Controllers\SepayWebhookController::class)
     ->name('webhook.sepay');
 
-// ─── Landing page (guest) or redirect to feed (auth) ────────────────
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('feed');
-    }
-    return redirect()->route('landing');
-})->name('home');
-Route::get('/welcome', HomePage::class)->name('landing');
+// ─── Landing page ───────────────────────────────────────────────────
+Route::get('/', HomePage::class)->name('home');
 
 // ─── Guest routes ────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
