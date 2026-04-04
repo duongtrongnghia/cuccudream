@@ -21,7 +21,7 @@
     </div>
 
     {{-- Course grid --}}
-    <div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+    <div class="grid gap-4" style="grid-template-columns: repeat(2, 1fr);">
         @forelse($courses as $course)
         <div class="card">
             @if($course->thumbnail)
