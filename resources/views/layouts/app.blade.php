@@ -20,7 +20,7 @@
 <header style="background:#FFFFFF; border-bottom:1px solid #E1E1E1; position:sticky; top:0; z-index:50;">
     <div class="max-w-screen-xl mx-auto px-4 h-14 flex items-center justify-between gap-2 sm:gap-4" style="min-width:0;">
         {{-- Logo --}}
-        <a href="{{ route('feed') }}" class="flex items-center gap-1 shrink-0">
+        <a href="{{ route('home') }}" class="flex items-center gap-1 shrink-0">
             <span style="font-size:1.3rem; font-weight:800; letter-spacing:-0.02em; color:#D4896E;">Cúc Cu</span>
             <span style="font-size:1.3rem; font-weight:800; letter-spacing:-0.02em; color:#7B8B6F;">Dream</span><span style="font-size:0.75rem; font-weight:700; color:#8B7E74;">™</span>
         </a>
