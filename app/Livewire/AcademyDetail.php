@@ -82,6 +82,7 @@ class AcademyDetail extends Component
                 'status' => 'pending_payment',
                 'enrolled_at' => now(),
             ]);
+            $this->pendingPayment = true;
             $this->dispatch('toast', message: 'Vui lòng chuyển khoản để hoàn tất đăng ký!', type: 'info');
         }
     }

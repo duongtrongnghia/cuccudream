@@ -39,15 +39,25 @@
         @if($enrolled)
         <p style="font-size:0.8rem; color:#059669; font-weight:600;">✓ Đã đăng ký</p>
         @elseif($pendingPayment)
-        <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:0.5rem; padding:0.75rem; margin-top:0.5rem;">
-            <p style="font-size:0.8rem; font-weight:600; color:#92400E; margin-bottom:0.375rem;">⏳ Chờ thanh toán</p>
-            <p style="font-size:0.8rem; color:#636E72; line-height:1.5;">
-                Chuyển khoản <strong style="color:#FF6B6B;">{{ number_format($course->price, 0, ',', '.') }}đ</strong> qua SePay
+        <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:0.75rem; padding:1.25rem; margin-top:0.75rem;">
+            <p style="font-size:0.9rem; font-weight:700; color:#92400E; margin-bottom:0.75rem;">⏳ Chờ thanh toán</p>
+            {{-- QR Code VietQR --}}
+            @php
+                $bankAccount = config('services.sepay.bank_account');
+                $bankName = config('services.sepay.bank_name');
+                $transferContent = 'COURSE' . $course->id . 'U' . auth()->id();
+                $qrUrl = 'https://qr.sepay.vn/img?acc=' . $bankAccount . '&bank=' . $bankName . '&amount=' . (int)$course->price . '&des=' . urlencode($transferContent);
+            @endphp
+            <div style="text-align:center; margin-bottom:0.75rem;">
+                <img src="{{ $qrUrl }}" alt="QR Thanh toán" style="width:200px; height:200px; margin:0 auto; border-radius:0.5rem; border:1px solid #E0D5C5;">
+            </div>
+            <p style="font-size:0.85rem; color:#2D2926; line-height:1.6; text-align:center;">
+                Chuyển khoản <strong style="color:#D4896E;">{{ number_format($course->price, 0, ',', '.') }}đ</strong>
             </p>
-            <p style="font-size:0.8rem; color:#636E72; margin-top:0.25rem;">
-                Nội dung: <strong style="color:#FF6B6B;">COURSE{{ $course->id }}U{{ auth()->id() }}</strong>
+            <p style="font-size:0.85rem; color:#2D2926; margin-top:0.25rem; text-align:center;">
+                Nội dung: <strong style="color:#D4896E;">{{ $transferContent }}</strong>
             </p>
-            <p style="font-size:0.7rem; color:#92400E; margin-top:0.375rem;">Hệ thống sẽ tự kích hoạt sau khi nhận được tiền.</p>
+            <p style="font-size:0.75rem; color:#92400E; margin-top:0.5rem; text-align:center; font-weight:600;">Quét QR hoặc chuyển khoản thủ công. Hệ thống tự kích hoạt sau khi nhận tiền.</p>
         </div>
         @else
         @auth
