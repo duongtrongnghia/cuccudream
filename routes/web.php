@@ -25,15 +25,22 @@ use App\Livewire\LeaderboardPage;
 use App\Livewire\ProfilePage;
 use App\Livewire\QaPage;
 use App\Livewire\SignalsPage;
+use App\Livewire\HomePage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// ─── SePay webhook (no auth, verified by API key) ──────────────────
+// ─── SePay webhook (no auth, verified by API key) ──────��───────────
 Route::post('/webhook/sepay', \App\Http\Controllers\SepayWebhookController::class)
     ->name('webhook.sepay');
 
-// ─── Redirect root → feed or login ──────────────────────────────────
-Route::get('/', fn() => redirect()->route(Auth::check() ? 'feed' : 'login'));
+// ─── Landing page (guest) or redirect to feed (auth) ────────────────
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('feed');
+    }
+    return redirect()->route('landing');
+})->name('home');
+Route::get('/welcome', HomePage::class)->name('landing');
 
 // ─── Guest routes ────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {

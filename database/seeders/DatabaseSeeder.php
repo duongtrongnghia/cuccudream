@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // ─── Admin user ───────────────────────────────────────────────
-        $admin = User::updateOrCreate(['email' => 'admin@cuccu.dream'], [
+        $admin = User::updateOrCreate(['email' => 'nguyenthucuccu@gmail.com'], [
             'name'       => 'Admin',
             'username'   => 'admin',
             'password'   => Hash::make('password'),
