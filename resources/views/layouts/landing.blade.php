@@ -36,7 +36,7 @@
         }
     </style>
 </head>
-<body style="background:#F5EDE0; color:#2D2926; font-family:'Nunito',sans-serif;">
+<body style="background:#F5EDE0; color:#2D2926; font-family:'Nunito',sans-serif; font-weight:500; -webkit-font-smoothing:antialiased;">
     {{ $slot }}
     @livewireScripts
 </body>

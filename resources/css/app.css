@@ -45,7 +45,7 @@ html.font-serif-mode .badge {
 @layer base {
     html {
         color-scheme: light;
-        font-size: 112.5%; /* 18px base — larger for parents to read easily */
+        font-size: 118.75%; /* 19px base — larger for parents to read easily */
         overflow-x: hidden;
     }
 
@@ -54,7 +54,7 @@ html.font-serif-mode .badge {
         color: #2D2926;
         font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif;
         -webkit-font-smoothing: antialiased;
-        font-weight: 500; /* bolder default for readability */
+        font-weight: 600; /* bolder default for readability */
         min-width: 0;
         overflow-x: hidden;
     }
