@@ -44,6 +44,14 @@ class AcademyDetail extends Component
                     ->whereIn('lesson_id', $lessonIds)
                     ->whereNotNull('completed_at')
                     ->count();
+
+                // Auto-open first lesson if none selected
+                if (!$this->openLessonId) {
+                    $firstLesson = $this->course->modules->first()?->lessons->first();
+                    if ($firstLesson) {
+                        $this->openLessonId = $firstLesson->id;
+                    }
+                }
             }
         }
     }
