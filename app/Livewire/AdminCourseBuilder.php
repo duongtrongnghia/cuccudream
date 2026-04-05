@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Course;
 use App\Models\Lesson;
-use App\Models\LessonTask;
 use App\Models\Module;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -12,6 +11,10 @@ use Livewire\Component;
 class AdminCourseBuilder extends Component
 {
     public Course $course;
+
+    // Course editing
+    public string $courseTitle = '';
+    public string $courseDescription = '';
 
     // Module form
     public bool $showAddModule = false;
@@ -22,23 +25,36 @@ class AdminCourseBuilder extends Component
     public ?int $addLessonToModule = null;
     #[Rule('required|min:3|max:150')]
     public string $lessonTitle = '';
-    public string $lessonType = 'lecture';
-    public int $lessonXp = 25;
-    public bool $lessonLocked = true;
 
-    // Task form
-    public ?int $addTaskToLesson = null;
-    #[Rule('required|min:3|max:200')]
-    public string $taskTitle = '';
-    public string $taskDescription = '';
-    public string $taskType = 'text';
-    public bool $taskRequired = true;
+    // Lesson editing
+    public ?int $editingLessonId = null;
+    public string $editLessonTitle = '';
+    public string $editLessonDescription = '';
+    public string $editLessonVideoUrl = '';
+    public int $editLessonDuration = 0;
+
+    // Module editing
+    public ?int $editingModuleId = null;
+    public string $editModuleTitle = '';
 
     public function mount(int $id): void
     {
-        $this->course = Course::with(['modules.lessons.tasks'])->findOrFail($id);
+        $this->course = Course::with(['modules.lessons'])->findOrFail($id);
+        $this->courseTitle = $this->course->title;
+        $this->courseDescription = $this->course->description ?? '';
     }
 
+    // ─── Course ─────────────────────────────────────────────
+    public function saveCourse(): void
+    {
+        $this->course->update([
+            'title' => $this->courseTitle,
+            'description' => $this->courseDescription,
+        ]);
+        $this->dispatch('toast', message: 'Đã lưu thông tin khóa học', type: 'success');
+    }
+
+    // ─── Module ─────────────────────────────────────────────
     public function addModule(): void
     {
         $this->validate(['moduleName' => 'required|min:3|max:100']);
@@ -52,12 +68,28 @@ class AdminCourseBuilder extends Component
         $this->course->refresh();
     }
 
+    public function editModule(int $id): void
+    {
+        $module = Module::findOrFail($id);
+        $this->editingModuleId = $id;
+        $this->editModuleTitle = $module->title;
+    }
+
+    public function saveModule(): void
+    {
+        if (!$this->editingModuleId) return;
+        Module::findOrFail($this->editingModuleId)->update(['title' => $this->editModuleTitle]);
+        $this->editingModuleId = null;
+        $this->course->refresh();
+    }
+
     public function deleteModule(int $id): void
     {
         Module::where('id', $id)->where('course_id', $this->course->id)->delete();
         $this->course->refresh();
     }
 
+    // ─── Lesson ─────────────────────────────────────────────
     public function addLesson(): void
     {
         $this->validate(['lessonTitle' => 'required|min:3|max:150']);
@@ -67,47 +99,45 @@ class AdminCourseBuilder extends Component
         Lesson::create([
             'module_id' => $this->addLessonToModule,
             'title' => $this->lessonTitle,
-            'lesson_type' => $this->lessonType,
-            'xp_reward' => $this->lessonXp,
+            'lesson_type' => 'lecture',
             'order_index' => $maxOrder + 1,
-            'is_locked_by_default' => $this->lessonLocked,
         ]);
-        $this->reset(['lessonTitle', 'lessonType', 'lessonXp', 'lessonLocked', 'addLessonToModule']);
-        $this->lessonType = 'lecture';
-        $this->lessonXp = 25;
-        $this->lessonLocked = true;
+        $this->reset(['lessonTitle', 'addLessonToModule']);
         $this->course->refresh();
+    }
+
+    public function editLesson(int $id): void
+    {
+        $lesson = Lesson::findOrFail($id);
+        $this->editingLessonId = $id;
+        $this->editLessonTitle = $lesson->title;
+        $this->editLessonDescription = $lesson->content ?? '';
+        $this->editLessonVideoUrl = $lesson->video_url ?? '';
+        $this->editLessonDuration = $lesson->duration_minutes ?? 0;
+    }
+
+    public function saveLesson(): void
+    {
+        if (!$this->editingLessonId) return;
+        Lesson::findOrFail($this->editingLessonId)->update([
+            'title' => $this->editLessonTitle,
+            'content' => $this->editLessonDescription ?: null,
+            'video_url' => $this->editLessonVideoUrl ?: null,
+            'duration_minutes' => $this->editLessonDuration,
+        ]);
+        $this->editingLessonId = null;
+        $this->course->refresh();
+        $this->dispatch('toast', message: 'Đã lưu bài học', type: 'success');
+    }
+
+    public function cancelEditLesson(): void
+    {
+        $this->editingLessonId = null;
     }
 
     public function deleteLesson(int $id): void
     {
         Lesson::findOrFail($id)->delete();
-        $this->course->refresh();
-    }
-
-    public function addTask(): void
-    {
-        $this->validate(['taskTitle' => 'required|min:3|max:200']);
-        if (!$this->addTaskToLesson) return;
-
-        $maxOrder = LessonTask::where('lesson_id', $this->addTaskToLesson)->max('order_index') ?? -1;
-        LessonTask::create([
-            'lesson_id' => $this->addTaskToLesson,
-            'title' => $this->taskTitle,
-            'description' => $this->taskDescription ?: null,
-            'type' => $this->taskType,
-            'order_index' => $maxOrder + 1,
-            'is_required' => $this->taskRequired,
-        ]);
-        $this->reset(['taskTitle', 'taskDescription', 'taskType', 'taskRequired', 'addTaskToLesson']);
-        $this->taskType = 'text';
-        $this->taskRequired = true;
-        $this->course->refresh();
-    }
-
-    public function deleteTask(int $id): void
-    {
-        LessonTask::findOrFail($id)->delete();
         $this->course->refresh();
     }
 
