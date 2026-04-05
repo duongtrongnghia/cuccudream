@@ -239,6 +239,6 @@ class AcademyDetail extends Component
             'submittedTaskIds' => $submittedTaskIds,
             'submissions' => $submissions,
             'classSubmissions' => $classSubmissions,
-        ])->layout('layouts.app', ['title' => $this->course->title . ' — Khóa học']);
+        ])->layout('layouts.app', ['title' => $this->course->title . ' — Khóa học', 'hideSidebar' => true]);
     }
 }

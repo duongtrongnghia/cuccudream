@@ -112,7 +112,7 @@
     <div class="flex gap-5" style="min-width:0;">
 
         {{-- LEFT SIDEBAR --}}
-        <aside class="hidden lg:flex flex-col gap-3 w-52 shrink-0">
+        <aside class="hidden lg:flex flex-col gap-3 w-52 shrink-0" @if(!empty($hideSidebar)) style="display:none !important;" @endif>
             {{-- Navigation --}}
             <nav class="card" style="padding:0.5rem;">
                 <a href="{{ route('feed') }}" class="nav-item {{ request()->routeIs('feed') ? 'active' : '' }}">
@@ -177,7 +177,7 @@
         </main>
 
         {{-- RIGHT SIDEBAR --}}
-        <aside class="hidden xl:flex flex-col gap-3 w-60 shrink-0">
+        <aside class="hidden xl:flex flex-col gap-3 w-60 shrink-0" @if(!empty($hideSidebar)) style="display:none !important;" @endif>
             {{-- My EXP card --}}
             @auth
             <livewire:sidebar-my-xp />
