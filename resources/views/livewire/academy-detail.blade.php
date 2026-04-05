@@ -5,14 +5,6 @@
 
     {{-- Course header --}}
     <div class="card mb-4">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="badge badge-pillar-{{ $course->pillar }}" style="font-size:0.7rem;">{{ ucfirst($course->pillar) }}</span>
-            <span class="badge" style="font-size:0.7rem; {{ match($course->difficulty) { 'basic' => 'background:#D1FAE5; color:#065F46;', 'advanced' => 'background:#E8F5E9; color:#E85555;', 'expert' => 'background:#FEE2E2; color:#991B1B;', default => 'background:#EEECE9; color:#636E72;' } }}">{{ ucfirst($course->difficulty) }}</span>
-            @if($course->min_level > 1)
-            <span class="level-badge">Lv.{{ $course->min_level }}+</span>
-            @endif
-        </div>
-
         <h1 style="font-size:1.25rem; font-weight:800; color:#1A1A1A; margin-bottom:0.5rem;">{{ $course->title }}</h1>
 
         @if($course->description)
