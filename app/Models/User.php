@@ -138,23 +138,31 @@ class User extends Authenticatable
     public function getJobStageAttribute(): string
     {
         if ($this->account_type === 'kid') {
-            return match(true) {
-                $this->level <= 5   => 'Hạt Giống Nhỏ',
-                $this->level <= 15  => 'Mầm Non Xinh',
-                $this->level <= 30  => 'Họa Sĩ Tí Hon',
-                $this->level <= 50  => 'Ngôi Sao Sáng Tạo',
-                $this->level <= 80  => 'Nhà Phát Minh Nhí',
-                default             => 'Giấc Mơ Bay Xa',
+            return match($this->level) {
+                1       => 'Hạt Giống Nhỏ',
+                2       => 'Mầm Non Xinh',
+                3       => 'Bạn Nhỏ Hay Vẽ',
+                4       => 'Họa Sĩ Tí Hon',
+                5       => 'Ngôi Sao Sắc Màu',
+                6       => 'Nhà Phát Minh Nhí',
+                7       => 'Kiến Trúc Sư Mơ Mộng',
+                8       => 'Thuyền Trưởng Tưởng Tượng',
+                9       => 'Phù Thủy Sáng Tạo',
+                default => 'Giấc Mơ Bay Xa',
             };
         }
 
-        return match(true) {
-            $this->level <= 5   => 'Người Gieo Hạt',
-            $this->level <= 15  => 'Người Tưới Cây',
-            $this->level <= 30  => 'Người Chăm Vườn',
-            $this->level <= 50  => 'Người Ngắm Hoa',
-            $this->level <= 80  => 'Người Nuôi Mơ',
-            default             => 'Vườn Mơ Trọn Vẹn',
+        return match($this->level) {
+            1       => 'Người Mới Cầm Bút',
+            2       => 'Người Gieo Hạt',
+            3       => 'Người Tưới Cây',
+            4       => 'Người Chăm Vườn',
+            5       => 'Họa Sĩ Học Việc',
+            6       => 'Họa Sĩ Cá Tính',
+            7       => 'Người Kể Chuyện',
+            8       => 'Người Nuôi Mơ',
+            9       => 'Nghệ Sĩ Chữa Lành',
+            default => 'Vườn Mơ Trọn Vẹn',
         };
     }
 

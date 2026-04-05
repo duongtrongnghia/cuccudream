@@ -84,7 +84,7 @@ class XpService
 
         while (true) {
             $nextLevel = $user->level + 1;
-            if ($nextLevel > 300) break;
+            if ($nextLevel > 10) break;
 
             $cumulative = $this->cumulativeExpForLevel($nextLevel);
 
@@ -103,10 +103,7 @@ class XpService
     public function expRequiredForLevel(int $level): int
     {
         $table = config('exp_table');
-        if (isset($table[$level])) {
-            return $table[$level];
-        }
-        return (int) round(158340 * pow(1.08, $level - 60));
+        return $table[$level] ?? 0;
     }
 
     public function cumulativeExpForLevel(int $level): int
@@ -121,7 +118,7 @@ class XpService
     public function expToNextLevel(User $user): int
     {
         $nextLevel = $user->level + 1;
-        if ($nextLevel > 300) return 0;
+        if ($nextLevel > 10) return 0;
         return max(0, $this->cumulativeExpForLevel($nextLevel) - $user->xp);
     }
 
