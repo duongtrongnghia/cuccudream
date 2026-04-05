@@ -20,7 +20,7 @@
             {{-- Thumbnail --}}
             @if($product->thumbnail)
             <div style="height:140px; background:#EEECE9; border-radius:0.5rem; margin-bottom:0.75rem; overflow:hidden;">
-                <img src="{{ asset('storage/' . $product->thumbnail) }}" alt="" style="width:100%; height:100%; object-fit:cover;">
+                <img src="{{ str_starts_with($product->thumbnail, '/') ? $product->thumbnail : asset('storage/' . $product->thumbnail) }}" alt="" style="width:100%; height:100%; object-fit:cover;">
             </div>
             @else
             <div style="height:100px; background:#F0EDE8; border-radius:0.5rem; margin-bottom:0.75rem; display:flex; align-items:center; justify-content:center;">
