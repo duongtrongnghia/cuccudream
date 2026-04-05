@@ -72,7 +72,7 @@
             @else
             {{-- Display lesson --}}
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2 flex-1 cursor-pointer" wire:click="editLesson({{ $lesson->id }})">
+                <div class="flex items-center gap-2 flex-1">
                     <span style="font-size:0.7rem; font-weight:700; color:#6B6158;">{{ $lesson->order_index + 1 }}.</span>
                     <span style="font-size:0.85rem; font-weight:600; color:#2D2926;">{{ $lesson->title }}</span>
                     @if($lesson->video_url)
@@ -81,9 +81,11 @@
                     @if($lesson->duration_minutes)
                     <span style="font-size:0.7rem; color:#6B6158;">({{ $lesson->duration_minutes }}p)</span>
                     @endif
-                    <span style="font-size:0.6rem; color:#6B6158;">✎</span>
                 </div>
-                <button wire:click="deleteLesson({{ $lesson->id }})" wire:confirm="Xóa bài học này?" class="btn btn-ghost" style="font-size:0.7rem; padding:0.2rem 0.4rem; color:#991B1B;">×</button>
+                <div class="flex gap-1">
+                    <button wire:click="editLesson({{ $lesson->id }})" class="btn btn-gold" style="font-size:0.75rem; padding:0.3rem 0.75rem;">Sửa</button>
+                    <button wire:click="deleteLesson({{ $lesson->id }})" wire:confirm="Xóa bài học này?" class="btn btn-danger" style="font-size:0.75rem; padding:0.3rem 0.5rem;">×</button>
+                </div>
             </div>
             @if($lesson->content)
             <p style="font-size:0.75rem; color:#6B6158; margin-top:0.25rem; margin-left:1.5rem;">{{ Str::limit($lesson->content, 80) }}</p>
