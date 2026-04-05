@@ -26,9 +26,9 @@ class AcademyDetail extends Component
     public string $taskAnswer = '';
     public ?int $activeTaskId = null;
 
-    public function mount(int $id): void
+    public function mount(string $slug): void
     {
-        $this->course = Course::with(['modules.lessons.tasks'])->findOrFail($id);
+        $this->course = Course::with(['modules.lessons.tasks'])->where('slug', $slug)->firstOrFail();
         $this->totalLessons = $this->course->modules->sum(fn($m) => $m->lessons->count());
 
         if (Auth::check()) {

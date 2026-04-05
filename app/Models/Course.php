@@ -4,20 +4,42 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Course extends Model
 {
     protected $fillable = [
-        'title', 'description', 'pillar', 'difficulty', 'min_level',
+        'title', 'slug', 'description', 'pillar', 'difficulty', 'min_level',
         'xp_reward', 'aip_reward', 'price', 'thumbnail', 'is_published',
     ];
+
+    protected $casts = ['is_published' => 'boolean'];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Course $course) {
+            if (empty($course->slug)) {
+                $course->slug = Str::slug($course->title);
+            }
+        });
+
+        static::updating(function (Course $course) {
+            if ($course->isDirty('title') && !$course->isDirty('slug')) {
+                $course->slug = Str::slug($course->title);
+            }
+        });
+    }
+
+    /** Route model binding uses slug */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function isFree(): bool
     {
         return $this->price <= 0;
     }
-
-    protected $casts = ['is_published' => 'boolean'];
 
     public function modules(): HasMany
     {

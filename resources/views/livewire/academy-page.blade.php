@@ -48,7 +48,7 @@
                     @else
                     <p style="font-size:0.9rem; font-weight:700; color:#7B8B6F;">Miễn phí</p>
                     @endif
-                    <a href="{{ route('academy.show', $course->id) }}" class="btn btn-gold" style="font-size:0.85rem; padding:0.5rem 1rem; border-radius:0.5rem;">Xem khóa học</a>
+                    <a href="{{ route('academy.show', $course->slug) }}" class="btn btn-gold" style="font-size:0.85rem; padding:0.5rem 1rem; border-radius:0.5rem;">Xem khóa học</a>
                 </div>
             </div>
         </div>

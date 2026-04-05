@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/challenge/{id}',    ChallengeDetail::class)->name('challenge.show');
         Route::get('/leaderboard',       LeaderboardPage::class)->name('leaderboard');
         Route::get('/khoa-hoc',          AcademyPage::class)->name('academy');
-        Route::get('/khoa-hoc/{id}',     AcademyDetail::class)->name('academy.show');
+        Route::get('/khoa-hoc/{slug}',   AcademyDetail::class)->name('academy.show');
         Route::get('/marketplace',       \App\Livewire\MarketplacePage::class)->name('marketplace')
             ->middleware(\App\Http\Middleware\ParentOnly::class);
         Route::get('/affiliate',         AffiliatePage::class)->name('affiliate')

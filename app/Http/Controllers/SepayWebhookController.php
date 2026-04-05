@@ -96,7 +96,7 @@ class SepayWebhookController extends Controller
         $user->notify(new GenericNotification(
             '🎓',
             'Thanh toán thành công! Khóa học "' . $course->title . '" đã được mở.',
-            route('academy.show', $course->id)
+            route('academy.show', $course->slug)
         ));
 
         Log::info("SePay: course enrollment activated", [
