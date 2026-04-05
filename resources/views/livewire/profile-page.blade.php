@@ -42,9 +42,6 @@
                     @elseif($profileUser->account_type === 'kid')
                     <span style="font-size:0.7rem; font-weight:600; padding:0.125rem 0.5rem; border-radius:0.375rem; background:#FDE8D8; color:#9B3B1A; border:1px solid #F8C4A0;">Bé</span>
                     @endif
-                    @if($profileUser->da_count > 0)
-                    <span class="da-gem" style="font-size:0.8rem;">◆ {{ $profileUser->da_count }} Đá</span>
-                    @endif
                     @endif
                 </div>
                 @if(!$editingProfile)
@@ -70,10 +67,9 @@
                 </div>
 
                 <div class="flex gap-4 flex-wrap">
-                    <div><p style="font-size:1rem; font-weight:700; color:#FF6B6B;">{{ number_format($profileUser->aip) }}</p><p style="font-size:0.65rem; color:#636E72;">AIP</p></div>
-                    <div><p style="font-size:1rem; font-weight:700; color:#DC2626;">{{ $profileUser->streak }}</p><p style="font-size:0.65rem; color:#636E72;"> Streak</p></div>
-                    <div><p style="font-size:1rem; font-weight:700; color:#1A1A1A;">{{ $profileUser->posts()->count() }}</p><p style="font-size:0.65rem; color:#636E72;">Bài viết</p></div>
-                    <div><p style="font-size:1rem; font-weight:700; color:#FF6B6B;">{{ $profileUser->posts()->where('is_cot',true)->count() }}</p><p style="font-size:0.65rem; color:#636E72;">★ Tâm Đắc</p></div>
+                    <div><p style="font-size:1rem; font-weight:800; color:#D4896E;">🔥 {{ $profileUser->streak }}</p><p style="font-size:0.7rem; color:#4A4A4A; font-weight:600;">Ngày liên tiếp</p></div>
+                    <div><p style="font-size:1rem; font-weight:800; color:#1A1A1A;">{{ $profileUser->posts()->count() }}</p><p style="font-size:0.7rem; color:#4A4A4A; font-weight:600;">Bài viết</p></div>
+                    <div><p style="font-size:1rem; font-weight:800; color:#D4896E;">{{ $profileUser->posts()->where('is_cot',true)->count() }}</p><p style="font-size:0.7rem; color:#4A4A4A; font-weight:600;">★ Tâm Đắc</p></div>
                 </div>
             </div>
         </div>

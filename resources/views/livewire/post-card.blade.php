@@ -39,9 +39,6 @@
                     {{ $post->user->name }}
                 </a>
                 <span class="level-badge">Lv.{{ $post->user->level }}</span>
-                @if($post->user->da_count > 0)
-                <span class="da-gem">◆ {{ $post->user->da_count }}</span>
-                @endif
             </div>
             <div class="flex flex-wrap items-center gap-1.5 mt-0.5">
                 @if($post->topic)

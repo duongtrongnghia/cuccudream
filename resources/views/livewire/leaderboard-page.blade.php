@@ -2,7 +2,7 @@
     <h1 style="font-size:1.25rem; font-weight:800; color:#1A1A1A; margin-bottom:1rem;">★ Leaderboard</h1>
 
     <div class="tab-nav mb-6">
-        @foreach(['week'=>'EXP Tuần','month'=>'EXP Tháng','alltime'=>'EXP All-time','da'=>'◆ Đá Không Cực'] as $p => $l)
+        @foreach(['week'=>'EXP Tuần','month'=>'EXP Tháng','alltime'=>'EXP All-time'] as $p => $l)
         <button wire:click="setPeriod('{{ $p }}')" class="tab-item {{ $period === $p ? 'active' : '' }}">{{ $l }}</button>
         @endforeach
     </div>
@@ -55,9 +55,7 @@
                 </div>
             </div>
             <div class="text-right">
-                @if($period === 'da')
-                <p style="font-size:0.9rem; font-weight:700; color:#FF6B6B;">◆ {{ $user->da_count }}</p>
-                @elseif(in_array($period, ['week', 'month']))
+                @if(in_array($period, ['week', 'month']))
                 <p style="font-size:0.875rem; font-weight:700; color:#FF6B6B;">{{ number_format($user->period_xp ?? 0) }}</p>
                 <p style="font-size:0.65rem; color:#636E72;">EXP {{ $period === 'week' ? 'tuần' : 'tháng' }}</p>
                 @else
